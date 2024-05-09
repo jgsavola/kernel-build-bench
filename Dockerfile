@@ -29,6 +29,9 @@ WORKDIR /usr/src/linux-6.8.9
 # Use default configuration for x86_64 architecture
 RUN make defconfig
 
+# Here we add a non-caching layer. Any change here will invalidate the cache from this layer onwards.
+ARG CACHEBUST=1
+
 # Compile the kernel with default settings
 RUN make -j$(nproc)
 
