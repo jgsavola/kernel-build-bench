@@ -29,11 +29,16 @@ WORKDIR /usr/src/linux-6.8.9
 # Use default configuration for x86_64 architecture
 RUN make defconfig
 
+<<<<<<< HEAD
 ARG NPROC
 ARG TIMESTAMP
 
 # Invalidate layers from here on
 RUN echo "$TIMESTAMP" >/tmp/timestamp.tmp
+=======
+# Here we add a non-caching layer. Any change here will invalidate the cache from this layer onwards.
+ARG CACHEBUST=1
+>>>>>>> main
 
 # Compile the kernel with default settings
 RUN make -j$NPROC
