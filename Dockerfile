@@ -29,8 +29,14 @@ WORKDIR /usr/src/linux-6.8.9
 # Use default configuration for x86_64 architecture
 RUN make defconfig
 
+ARG NPROC
+ARG TIMESTAMP
+
+# Invalidate layers from here on
+RUN echo "$TIMESTAMP" >/tmp/timestamp.tmp
+
 # Compile the kernel with default settings
-RUN make -j$(nproc)
+RUN make -j$NPROC
 
 # Set the default command
 CMD ["bash"]
